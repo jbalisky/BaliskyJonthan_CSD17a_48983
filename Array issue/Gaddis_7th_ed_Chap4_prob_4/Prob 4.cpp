@@ -2,7 +2,7 @@
  File:   Prob 10.cpp
  Author: Jonathan Balisky
  Created on Sept 10, 2015, :33 PM
- Purpose: Which Rectangle is bigger! 
+ Purpose: Mean mode! 
  */
 
 //Library iostream
@@ -15,7 +15,7 @@ using namespace std;
 
 //Global const none
 int * prepare(int);
-void sort(int *);
+void sort(int *, int);
 
 
 int main(int argc, char** argv) {
@@ -33,8 +33,13 @@ int main(int argc, char** argv) {
     
     table=prepare(size); //Filling table putting it into table
     
+    sort(table, size); //Sorting the array
     
- 
+//    for(int i =0; i<size; i++){
+//        cout<<table[i]<<" /n";
+//        if (i%10 == 0) cout<<endl;
+//    }
+// 
     
     delete [] table;
     return 0;
@@ -59,7 +64,7 @@ int * prepare (int size){
         table[i] = rand()%6; //Filling array with number from 0-5
         
 
-        cout<<"Array = "<<table[i]; //For diagonostics 
+       // cout<<"Array = "<<table[i]; //For diagonostics 
     }
    return table;
 }    
@@ -67,55 +72,47 @@ int * prepare (int size){
 
 
 /***************************************Sort***************************************************
- * Purpose: To Sort all the user guesses to show I can do it...so HA! Using a bubble sort
- * Input: table, counter, level
+ * Purpose: To Sort the array of numbers Using a bubble sort
+ * Input: table, size
  * Output:none
  
  ***********************************************************************************************/
-void sort(char **table, int counter, int level){
+void sort(int *table, int size ){
     
     bool swap = false;//For the bubble swap function
-    int  indx = 0; //Second index location for table       
+          
    
     cout<<"Unsorted answers from you!!"<<endl;
-    for(int i = 0;i<counter; i++){
-        for(int j = 0;j<level; j++){
-            cout<<table[i][j];
-        }
-        cout<<endl;
+    for(int i = 0;i<size; i++){
+        if (i%10 == 0 && i > 1) cout<<endl;
+        cout<<table[i];
+       
     }
     
     do{
         swap = false;
-        
-        for(int i = 0; i<counter-1; i++){ //counter -1 because bubble swap is always columns - 1
-            indx = 0;
-            while(table[i][indx]==table[i+1][indx] && indx<level)indx++;//Checking to see if current
-                                                                         //index is equal then going to next location if they 
-                                                                         //are equal. 
-            if ( table[i][indx]>table[i+1][indx]){ //If that row and col. not equal 
-                                                  //then check if first is larger if it is then swap all numbers
-                //cout<<"i>i+1"<<endl;//For diagnostics 
-                for(int j = 0; j <level; j++){ //Swapping each 2 rows and their respective columns until all the rows are swapped
-                table [i][j] = table [i][j]^table[i+1][j]; //in place swap. to hopefully make Dr lehr happy so he give me extra credit
-                table [i+1][j] = table [i][j]^table[i+1][j];
-                table [i][j] = table [i][j]^table[i+1][j];
+       // cout<<endl<<"swap started"<<endl; //For Diag
+        for(int i = 0; i<size-1; i++){ //counter -1 because arrays start at 01 and you cant swap the last one
+           // cout<<endl<<"i = "<<i<<endl;
+            if ( table[i]>table[i+1]){ //If col. not equal                               
+                //cout<<"Table[i] = "<<table[i]<<"table[i+1] = "<<table[i+1]<<endl;//For diagnostics
+                table [i] = table [i]^table[i+1]; 
+                table [i+1] = table [i]^table[i+1];
+                table [i] = table [i]^table[i+1];
+                swap = true;
                 }
-                swap = true;            
+                           
             }
-                
-        }
     }while(swap == true);
     
+            //cout<<endl<<"swap Ended"<<endl; //For Diag
+    
     cout<<"Sorted answers via bubble sorts !!"<<endl;
-    for(int i = 0;i<counter; i++){
-        for(int j = 0;j<level; j++){
-            cout<<table[i][j];
+    for(int i = 0;i<size; i++){
+        if (i%10 == 0 && i != 0) cout<<endl;
+        cout<<table[i];
+          
         }
-        cout<<endl;
-    }
-    
-    
-    
-    
+       
+ 
 }
