@@ -16,6 +16,7 @@ using namespace std;
 //Global const none
 int * prepare(int);
 void sort(int *, int);
+float mean(int *, int);
 
 
 int main(int argc, char** argv) {
@@ -34,6 +35,8 @@ int main(int argc, char** argv) {
     table=prepare(size); //Filling table putting it into table
     
     sort(table, size); //Sorting the array
+    
+    cout<<"The mean is = "<<mean(table, size)<<endl;
     
 //    for(int i =0; i<size; i++){
 //        cout<<table[i]<<" /n";
@@ -96,7 +99,7 @@ void sort(int *table, int size ){
            // cout<<endl<<"i = "<<i<<endl;
             if ( table[i]>table[i+1]){ //If col. not equal                               
                 //cout<<"Table[i] = "<<table[i]<<"table[i+1] = "<<table[i+1]<<endl;//For diagnostics
-                table [i] = table [i]^table[i+1]; 
+                table [i] = table [i]^table[i+1]; //in place swap with the next number
                 table [i+1] = table [i]^table[i+1];
                 table [i] = table [i]^table[i+1];
                 swap = true;
@@ -109,10 +112,31 @@ void sort(int *table, int size ){
     
     cout<<"Sorted answers via bubble sorts !!"<<endl;
     for(int i = 0;i<size; i++){
-        if (i%10 == 0 && i != 0) cout<<endl;
+        if (i%10 == 0 && i != 0) cout<<endl;//Making the rows ten wide
         cout<<table[i];
-          
         }
+    cout<<endl;
        
  
 }
+/***************************************Mean**************************************************
+ * Purpose: Mean of array  
+ * Input: *table, size
+ * Output: mean
+ * 
+ 
+ ***********************************************************************************************/
+float  mean (int *table, int size){
+    
+    float avg = 0.0f, sum = 0.0f;
+    
+  
+    for (int i = 0; i<size; i++){
+        sum += table[i]; //Adding all the numbers together
+         // cout<<"Array = "<<table[i]; //For diagonostics 
+    }
+    avg = sum/static_cast<float>(size);
+   
+   return avg;
+}    
+  

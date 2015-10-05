@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/Prob\ 4.o
+	${OBJECTDIR}/Prob\ 1.o
 
 
 # C Compiler Flags
@@ -62,11 +62,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gaddis_7th_ed_chap4_prob_4.exe: ${OBJ
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gaddis_7th_ed_chap4_prob_4 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-.NO_PARALLEL:${OBJECTDIR}/Prob\ 4.o
-${OBJECTDIR}/Prob\ 4.o: Prob\ 4.cpp 
+.NO_PARALLEL:${OBJECTDIR}/Prob\ 1.o
+${OBJECTDIR}/Prob\ 1.o: Prob\ 1.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Prob\ 4.o Prob\ 4.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Prob\ 1.o Prob\ 1.cpp
 
 # Subprojects
 .build-subprojects:
