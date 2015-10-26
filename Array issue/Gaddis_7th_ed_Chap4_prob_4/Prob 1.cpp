@@ -131,6 +131,29 @@ float  mean (int *table, int size){
     float avg = 0.0f, sum = 0.0f;
     
   
+    for (int i = 0; i<size-1; i++){
+        if (table[i] == table [i+1]){
+            
+        }
+         // cout<<"Array = "<<table[i]; //For diagonostics 
+    }
+    avg = sum/static_cast<float>(size);
+   
+   return avg;
+}    
+  
+/***************************************Mode**************************************************
+ * Purpose: Mean of array  
+ * Input: *table, size
+ * Output: mean
+ * 
+ 
+ ***********************************************************************************************/
+float  mode (int *table, int size){
+    
+    float avg = 0.0f, sum = 0.0f;
+    
+  
     for (int i = 0; i<size; i++){
         sum += table[i]; //Adding all the numbers together
          // cout<<"Array = "<<table[i]; //For diagonostics 
@@ -139,4 +162,3 @@ float  mean (int *table, int size){
    
    return avg;
 }    
-  
