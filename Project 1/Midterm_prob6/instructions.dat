@@ -1,0 +1,12 @@
+*********************************************************************************************
+**                     		      **Mastermind **                                      **
+**           You have to guess numbers that are between 0-9 within 9 guesses!              **
+**              First select either easy or normal. easy = 3 numbers normal = 4            **
+**   			First type in three or four numbers as your guess                  **
+**        Then the game will show you the amount of Os and Xs you have for that guess.     **
+**   An O means that one of your numbers is correct but it is in the wrong position        **
+**       An X means that you have a number correct and in the right possition!             **
+**   So guess away! But remember you only have 9 guess. Run out of guesses and you lose.   **
+**                   Do you have what it takes? Can you decode the sequence?               **
+**                                   We will soon find out...;)                            **
+*********************************************************************************************

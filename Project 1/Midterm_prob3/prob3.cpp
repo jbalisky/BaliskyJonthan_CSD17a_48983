@@ -25,10 +25,11 @@ struct statsResult
 using namespace std;
 
 //Global const none
-int * prepare(int);
+
 void sort(int *, int);
 float mean(int *, int);
 statsResult *avgMedMode(int *,int);
+void print (statsResult *, int);
 
 int main(int argc, char** argv) {
 
@@ -37,50 +38,56 @@ int main(int argc, char** argv) {
     
     int *table;//Table for numbers
     int size; //Size of array
+    statsResult *sPtr; 
+    
     
     srand(time(0)); //Setting the time seed
     
     cout<<"Input size of array ";
     cin>>size; //Input the size of the array
     
-    table=prepare(size); //Filling table putting it into table
+    table = new int[size]; //alocating size for the array
     
-    sort(table, size); //Sorting the array
-    
-    cout<<"The mean is = "<<mean(table, size)<<endl;
+    for(int i = 0; i <size; i++){
+        cout<<"Please enter number for location table["<<i<<"]: ";
+        cin>>table[i];
+    }
+
+  sPtr =  avgMedMode(table, size);
+
+  print(sPtr, size);
     
 //    for(int i =0; i<size; i++){
 //        cout<<table[i]<<" /n";
 //        if (i%10 == 0) cout<<endl;
 //    }
 // 
-    
-    delete [] table;
+   delete [] sPtr->mode;
+   delete [] sPtr;//
+    delete [] table; //Cleaning up
     return 0;
 }
-/***************************************Prepare**************************************************
- * Purpose: Initializing values for the game.  
- * Input: answer, xs, os, guess, match, level
+/***************************************Print**************************************************
+ * Purpose: Printing the results  
+ * Input: *sPtr size
  * Output:
- * table
+ none
  
  ***********************************************************************************************/
-int * prepare (int size){
+void  print (statsResult *sPtr, int size){
     
-    int *table;
     
+    cout<<"The avg:"<<sPtr->avg<<"\n median:"<<sPtr->median
+            <<"\n Max Freq:"<<sPtr->maxFreq<<"\n number of modes:"<<sPtr->nModes<<endl;
+    //for(int i=0;i<size;i++)
+    cout<<"Modes: ";
+    for(int i = 0; i <sPtr->nModes; i++){
+        cout<<sPtr->mode[i]<<" ";
+    }
+    cout<<endl;
     
 //   int size = 10;
    
-   table = new int [size]; //Creating a new array
-  
-    for (int i = 0; i<size; i++){
-        table[i] = rand()%6; //Filling array with number from 0-5
-        
-
-       // cout<<"Array = "<<table[i]; //For diagonostics 
-    }
-   return table;
 }    
     
 
@@ -124,116 +131,20 @@ void sort(int *table, int size ){
     cout<<"Sorted answers via bubble sorts !!"<<endl;
     for(int i = 0;i<size; i++){
         if (i%10 == 0 && i != 0) cout<<endl;//Making the rows ten wide
-        cout<<table[i];
+        cout<<table[i]<<" ";
         }
     cout<<endl;
        
  
 }
-/***************************************Mean**************************************************
- * Purpose: Mean of array  
- * Input: *table, size
- * Output: mean
- * 
- 
- ***********************************************************************************************/
-float  mean (int *table, int size){
-    
-    float avg = 0.0f, sum = 0.0f;
-    
-  
-    for (int i = 0; i<size-1; i++){
-        sum += arr[i];
-  
-    }
-    avg = sum/size;
-   
-   return avg;
-}    
-  
-/***************************************Mode**************************************************
- * Purpose: Mean of array  
- * Input: *table, size
- * Output: mean
- * 
- 
- ***********************************************************************************************/
-float  mode (int *table, int size){
-    
-    float avg = 0.0f, sum = 0.0f;
-    
-  
-    for (int i = 0; i<size; i++){
-        sum += table[i]; //Adding all the numbers together
-         // cout<<"Array = "<<table[i]; //For diagonostics 
-    }
-    avg = sum/size;
-   
-   return avg;
-}    
 
-/***************************************Max Frequancy**************************************************
- * Purpose: Mean of array  
- * Input: *table, size
- * Output: mean
+/***************************************avgMedMode**************************************************
+ * Purpose: Mean, avg, mode of array  
+ * Input: *arr, size
+ * Output: pointer to structure
  * 
  
  ***********************************************************************************************/
-//int maxFreq (int *arr, int size){
-//    int max = 0, count = 1;
-//    
-//    for(int i =0; i <size-1; i++){
-//        if (arr[i] == arr[i+1])count++;
-//        else if (max < count){
-//            max = count;
-//            count = 1;
-//        }
-//    }
-////    return (max<count?count:max);
-//    if(max<count) return count;
-//    
-//    else return max;
-//    
-//}
-/***************************************n Modes**************************************************
- * Purpose: Mean of array  
- * Input: *table, size
- * Output: mean
- * 
- 
- ***********************************************************************************************/
-
-//int nModes(int *arr, int size){
-//    int maxF = maxFreq(arr, size); //Function call to fill max f
-//    int count = 1;
-//    int num=0;
-//     for(int i =0; i <size-1; i++){
-//        if (arr[i] == arr[i+1])count++;
-//        else if (maxF == count){
-//            num++;
-//            count = 1; //Reset counter
-//        }
-//    }
-//    if(maxF == count)num++;
-//    return num;
-//    
-//}
-
-//int *Modes(int *arr, int size){
-//    int *marr = new int[nModes(arr, size)];
-//    int count=1;
-//    int j=0;
-//    for(int i=0;i<size-1;i++){
-//        if(arr[i]==arr[i+1])count++;
-//        else if(maxFreq(arr,size)==count){
-//            marr[j]=arr[i];
-//            count=1;
-//            j++;
-//        }
-//    }
-//    if(count==maxFreq(arr,size))marr[j]=arr[size-1];
-//    return marr;
-//}
 statsResult *avgMedMode(int *arr,int size){
     sort(arr, size); //Calling sort fucntion
     int count=1; //Counter 
@@ -241,36 +152,40 @@ statsResult *avgMedMode(int *arr,int size){
     statsResult *obj = new statsResult; //new pointer to stats results
     obj->nModes=0; //Setting number of modes to 
     
-    //avg = ?
+    //avg
         
-    
-  
+     
     for (int i = 0; i<size-1; i++){ //Avg of all numbers
         sum += arr[i];
   
     }
-    obj->avg = sum/size; //Storing in structure
+    obj->avg = sum/(size-1); //Storing in structure
    
-    //median
+    //median if even number
+    if (size%2 == 0)obj->median= (static_cast<float>(arr[(size-1)/2])+static_cast<float>(arr[size/2]))/2.0;
+    //Mediean if odd number
+    else obj->median = arr[(size-1)/2];
+    
+    //max freqancy
     for(int i =0; i <size-1; i++){
         if (arr[i] == arr[i+1])count++; //Incease counter 
-        else if (obj.maxFreq < count){
-            obj.maxFreq = count;
+        else if (obj->maxFreq < count){
+            obj->maxFreq = count;
             count = 1;
         }
     }
-    if(count>obj.maxFreq)obj.maxFreq=count; //if last number in sequence is higher freqancy of all the rest
+    if(count>obj->maxFreq)obj->maxFreq=count; //if last number in sequence is higher freqancy of all the rest
    count=1; //reset counter 
    
    //Counting modes
     for(int i=0;i<size-1;i++){
         if (arr[i] == arr[i+1])count++;
-        else if (obj.maxFreq == count){//The two no longer match asses freqancy
+        else if (obj->maxFreq == count){//The two no longer match asses freqancy
             obj->nModes++; // add to amount of modes
             count = 1; //reset counter
         }
     }
-   if(count==obj->nModes)obj->nModes++; //one last check
+   if(count==obj->maxFreq)obj->nModes++; //one last check
    
    count=1; //reset counter
    int j=0;
