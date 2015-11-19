@@ -100,7 +100,7 @@ dynamic array creation for the mode when you exit the problem.
 concerned that their phones may be tapped. All of their data is 
 transmitted as four-digit integers. However, they utilize the digits 
 0,1,2,3,4,5,6,7 only. They have asked you to write a program that 
-will encrypt their data so that it may be transmitted more securely.
+will their data so that it may be transmitted more securely.
 Your application should read a four-digit integer with the numbers 
 0 to 7 entered by the user in an input dialog and encrypt it as 
 follows: Replace each digit by (the sum of that digit plus 5) modulus 8. 
