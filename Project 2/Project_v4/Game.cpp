@@ -6,9 +6,6 @@
  */
 
 #include"Game.h"
-//seems good, keep testing
-//seems that you are going to make IsValid as a base class
-//try it first and come to the lab to ask for help
 //ch 15 inheritance (i spell it right!!!)
 //ch 16 template
 /**
@@ -23,8 +20,8 @@ Game::Game(int l){
     //Dynamicly allocating memory
    answer = new int [level]; //
    sAnswer =  new char [level];
-   match = new bool [level]; //which collums are matched 
-   
+   aMatch = new bool [level]; //which collums are answers arematched 
+   gMatch = new bool [level]; //which guesses are right but wrong possition
     
 //Setting default vaules
     xs = 0; 
@@ -35,7 +32,8 @@ Game::Game(int l){
     for (int i = 0; i < level; i++) {
         answer[i] = rand() % 10; //creating answer from 0-9
         sAnswer [i] = answer[i] + 48; //ascii equivalent to numbers
-        match[i] = false; //Set all to false
+        aMatch[i] = false; //Set all to false
+        gMatch[i] = false; //set all to false
 
         //cout<<"answer = "<<answer[i]; //For diagonostics 
     }
@@ -64,27 +62,28 @@ Game::~Game(){
    // if(answer[0] != NULL){
         delete[] answer; //
         delete[] sAnswer;
-        delete[] match;
+        delete[] aMatch;
+        delete[] gMatch;
         //Deleting 2d array
       for (int i = 0; i<9; i++){
           delete table[i];
-     // } 
+     } 
         delete[] table;
-    }
+    //}
 }
 ////setting level into the private variables
 //void Game::setLevel(int l){
 //    level = l;
 //}
 ////setting usrG into the private variables
-//void Game::setUserG(string uG){
-//    usrG = uG;
-//}
+void Game::setUsrG(string uG){
+    usrG = uG;
+}
 //Getting xs 
 //need to put the return type at the beginning
 //only return var, should be const right?
 //just showing him you know the concept
-short Game::getXs(){
+short Game::getXs() const{
     return xs;
 }
 //Getting os
@@ -94,11 +93,11 @@ short Game::getOs() const {
 //Getting the amount of guesses left
 //if you only have one line command inside the function, you can put it into head file
 //called inline functino  cannot remember how to spell, sth inside the book
-int Game::getGuess(){
+int Game::getGuess() const{
     return guess;
 }
 
 //getting saved answer
-char *Game::getSAns(){
+char *Game::getSAns()const{
     return sAnswer;
 }

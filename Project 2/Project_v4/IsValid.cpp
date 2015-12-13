@@ -19,7 +19,7 @@ void IsValid::setLevel(int l){
 }
 
 /***************************************isvalid**************************************************
- * Purpose: To check whether or not the user entered 3 numbers 
+ * Purpose: To check whether or not the user entered correct amount of numbers 
  * Input: usrG, level
  * Output: True or false
  
@@ -27,6 +27,9 @@ void IsValid::setLevel(int l){
 
 bool IsValid::validate(){
     // cout<<"Call isvalid."<<endl; //For diagonostics
+//    for(int i = 0; i<level; i++){
+//        cout<<"usrG["<<i<<"] = "<< usrG[i]<<endl;
+//    }
     if (usrG.length() != level) {
         cout << "Please enter " << level << " numbers." << endl;
         return false;

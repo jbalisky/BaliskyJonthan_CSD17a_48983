@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     //missing para
     //should create the obj after you get the value of level
     int level = 3; //Difficulty  of game
-    Game game(level); //Game varriable 
+    //Game game(level); //Game varriable 
     string temp; //For the file output
     fstream inOut; // for file stream
     string usrG; //The users guess or input
@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
 
 
 
-        // cout<<"Call prepare."<<endl;//For diagonostics
+        cout<<"Call prepare."<<endl;//For diagonostics
         inOut.open("instructions.dat", ios::in);
         if (inOut.is_open()) {
             while (getline(inOut, temp)) {
@@ -132,7 +132,7 @@ int main(int argc, char** argv) {
                 cout << "Input your guess: " << endl; //User enter guess
                 getline(cin, usrG); //This should be removed And simply call a class function to do this
                 iV.setUserG(usrG); //Setting user guess in the is valid...
-                //game.setUserG(usrG);//Setting user guess in the Game class
+                game.setUsrG(usrG);//Setting user guess in the Game class
                 //cin.ignore();
 
             } while (iV.validate() == false); //Loop until user enters valid answer
@@ -159,7 +159,8 @@ int main(int argc, char** argv) {
 
         }
 
-        
+
+        game.sort();
        // sort(table, counter, level);
 
 //        for (int i = 0; i < 9; i++) {
@@ -173,6 +174,7 @@ int main(int argc, char** argv) {
             } while (usrG.length() != 1);
         } while (toupper(usrG[0]) != 89 && toupper(usrG[0]) != 78);
         //}while(usrG[0] > 'Y' || usrG < 'N' || (usrG[0]>'N' && usrG[0]<'Y'));
+        cout<<"Check"<<endl;
     } while (toupper(usrG[0]) == 'Y');
 
     cout << "See you again next time!" << endl;
