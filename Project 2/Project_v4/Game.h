@@ -7,22 +7,22 @@
 
 #ifndef GAME_H
 #define	GAME_H
-#include"IsValid.h"
 #include <iostream>
 #include <string>
 #include <cstring>
 #include <ctime>
 #include <cstdlib>
+#include "IsValid.h"
 using namespace std;
-
-class Game : public IsValid{
+template <class T>
+class Game :public IsValid{
 private:
-    int *answer; //randomly gen. answer
+    T *answer; //randomly gen. answer
     int guess; // how many guesses the user has left
-    //int level; //what difficultly the player selected 
+    int level; //what difficultly the player selected 
     int counter; //Which guess number the user is on
-    //string usrG; //the user's guess 
-    short xs, os; //Correct prostion and correct number
+//    string usrG; //the user's guess 
+    short xs, os; //Correct prosition and correct number
     char *sAnswer;
     char **table; //Table for answers
     bool *aMatch; //Array for answer matches
@@ -30,17 +30,18 @@ private:
     
 public:
     //only constructor , one para
-    Game (int);
+    Game (int level);
+    ~Game();
     short getXs() const;
     short getOs() const;
     int getGuess() const;
     char * getSAns() const;
 //    void setLevel(int);
-    void setUsrG(string);
- void compare() {
+//    void setUsrG(string);
+     void compare(string usrG) {
         
-       // cout<<"\n Compare ran \n";
-      
+        cout<<"\n Compare ran \n";
+        cout<<usrG<<endl;
         //Reseting vaules = 0
       xs = 0;
       os = 0;
@@ -86,13 +87,15 @@ public:
       guess--;
     }
     
-void gssHst(){
+    void gssHst(string usrG){
         
-      for (int i = 0; i < level; i++) {
-        table[counter][i] = usrG[i];
+        
+
+          for (int i = 0; i < level; i++) {
+            table[counter][i] = usrG[i];
+        }
+          counter++;
     }
-      counter++;
-}
     
     void sort(){
     bool swap = false; //For the bubble swap function
@@ -140,9 +143,106 @@ void gssHst(){
     }
   //  bool validate ();
     
-     ~Game();
+     
 };
+template <class T>
+Game<T>::Game(int level) :IsValid(level){
+    
+//    setLevel(level);
+    //you can ask here and delete the level parameter which is level here
+    //Game(int level) this level is a para!!!!!
+//    level = l;
+    
+    //Dynamicly allocating memory
+   answer = new T [level]; //
+   sAnswer =  new char [level];
+   aMatch = new bool [level]; //which collums are answers arematched 
+   gMatch = new bool [level]; //which guesses are right but wrong possition
+    
+//Setting default vaules
+    xs = 0; 
+    os = 0;
+    guess = 9;
+    counter = 0;
 
+    for (int i = 0; i < level; i++) {
+        answer[i] = rand() % 10; //creating answer from 0-9
+        sAnswer [i] = answer[i] + 48; //ascii equivalent to numbers
+        aMatch[i] = false; //Set all to false
+        gMatch[i] = false; //set all to false
+
+        //cout<<"answer = "<<answer[i]; //For diagonostics 
+    }
+
+
+
+    //   
+    table = new char *[guess]; //Creating 2 d dynamic array
+    for (int i = 0; i < guess; i++) { //
+        table[i] = new char[level];
+    }
+    // cout<<endl;
+    
+
+    for (int i = 0; i < guess; i++) {//Filling the array with empty spaces
+        for (int j = 0; j < level; j++) {
+            table[i][j] = ' ';
+        }
+    }
+
+ 
+}
+//Destructor
+template <class T>
+Game<T>::~Game(){
+    //if Game was activated and answer was actually created then delete.
+   // if(answer[0] != NULL){
+        delete[] answer; //
+        delete[] sAnswer;
+        delete[] aMatch;
+        delete[] gMatch;
+        //Deleting 2d array
+      for (int i = 0; i<9; i++){
+          delete table[i];
+     } 
+        delete[] table;
+    //}
+}
+//setting level into the private variables
+//void Game<T>::setLevel(int l){
+//    level = l;
+//}
+//setting usrG into the private variables
+//void Game<T>::setUsrG(string uG){
+//    
+//    usrG = uG;
+//}
+//Getting xs 
+//need to put the return type at the beginning
+//only return var, should be const right?
+//just showing him you know the concept
+template <class T>
+short Game<T>::getXs() const{
+    return xs;
+}
+//Getting os
+template <class T>
+short Game<T>::getOs() const {
+    return os;
+}
+//Getting the amount of guesses left
+//if you only have one line command inside the function, you can put it into head file
+//called inline functino  cannot remember how to spell, sth inside the book
+template <class T>
+int Game<T>::getGuess() const{
+    return guess;
+}
+
+//getting saved answer
+template <class T>
+char *Game<T>::getSAns()const{
+    return sAnswer;
+}
 
 #endif	/* GAME_H */
 

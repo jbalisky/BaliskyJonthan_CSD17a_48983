@@ -8,8 +8,9 @@
 //User Library for the Specification
 #include "IsValid.h"
 
-void IsValid::setUserG(string g){
-    usrG = g;
+void IsValid::setUserG(string usrG){
+    
+    cout<<this->usrG<<endl;
    // cout<<"IsValid was called and string was set"<<endl;
 }
 
@@ -25,17 +26,17 @@ void IsValid::setLevel(int l){
  
  ***********************************************************************************************/
 
-bool IsValid::validate(){
+bool IsValid::validate(string a){
     // cout<<"Call isvalid."<<endl; //For diagonostics
 //    for(int i = 0; i<level; i++){
 //        cout<<"usrG["<<i<<"] = "<< usrG[i]<<endl;
 //    }
-    if (usrG.length() != level) {
+    if (a.length() != level) {
         cout << "Please enter " << level << " numbers." << endl;
         return false;
     } else {
         for (int i = 0; i < level; i++) {
-            if (usrG[i] < 48 || usrG[i] > 57) {
+            if (a[i] < 48 || a[i] > 57) {
                 cout << "Please enter numbers and numbers only." << endl;
                 return false;
             }

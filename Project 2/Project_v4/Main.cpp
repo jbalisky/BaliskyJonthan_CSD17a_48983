@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 
     const int SIZE = 4;
     //Variables 
-    IsValid iV; //Is valid variable 
+//    IsValid iV; //Is valid variable 
     //missing para
     //should create the obj after you get the value of level
     int level = 3; //Difficulty  of game
@@ -88,10 +88,12 @@ int main(int argc, char** argv) {
             level = 4;
         }
         //Game decleration
+       
+      
         
-        Game game(level); //Game varriable 
-        
-        iV.setLevel(level);//setting the level (Maybe this should be put into a class function?)
+//        iV.setLevel(level);//setting the level (Maybe this should be put into a class function?)
+        //Game 
+        Game<char> game(level); //Game varriable 
        // game.setLevel(level);
 
        // table = prepare(answer, guess, match, level, sAnswer, nPtr); //Initialize (shouldnt need this)
@@ -113,7 +115,7 @@ int main(int argc, char** argv) {
         //      
         //Output answer as Binary
         inOut.open("Answer.dat", ios::out | ios::binary | ios::app);
-
+ 
         if (inOut.is_open()) {
             inOut<<endl;
             inOut.write(game.getSAns(), sizeof (game.getSAns()));
@@ -131,16 +133,18 @@ int main(int argc, char** argv) {
             do {
                 cout << "Input your guess: " << endl; //User enter guess
                 getline(cin, usrG); //This should be removed And simply call a class function to do this
-                iV.setUserG(usrG); //Setting user guess in the is valid...
-                game.setUsrG(usrG);//Setting user guess in the Game class
+               
+               // iV.setUserG(usrG); //Setting user guess in the is valid...
                 //cin.ignore();
 
-            } while (iV.validate() == false); //Loop until user enters valid answer
+            } while (game.validate(usrG) == false); //Loop until user enters valid answer
+            cout<<usrG<<endl;
+//            game.setUserG(usrG);//Setting user guess in the Game class
 
-            game.gssHst(); //Storing the user's guess
+            game.gssHst(usrG); //Storing the user's guess
            // counter++; //gssHst Ran
             
-            game.compare();
+            game.compare(usrG);
           //compare(answer, usrG, match, level, nPtr);
 
             cout << "X(s)=" << game.getXs() << endl; //Right numbers in right space
